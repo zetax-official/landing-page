@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>재택스 — 경리 운영을 책임집니다</title>
+<title>재택스 | 대표님의 전담 재택경리</title>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -16,14 +16,14 @@
   <ul class="nav-links">
     <li><a href="#services">서비스</a></li>
     <li><a href="#plans">가격 안내</a></li>
-    <li><a href="#contact" class="nav-cta">무료 상담</a></li>
+    <li><a href="#" class="nav-cta" onclick="ChannelIO('showMessenger');return false;">무료 상담</a></li>
   </ul>
   <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
 <div class="nav-mobile" id="navMobile">
   <a href="#services">서비스</a>
   <a href="#plans">가격 안내</a>
-  <a href="#contact" class="nm-cta">무료 상담</a>
+  <a href="#" class="nm-cta" onclick="ChannelIO('showMessenger');return false;">무료 상담</a>
 </div>
 
 <!-- HERO -->
@@ -36,7 +36,7 @@
     <div class="hero-left">
       <p class="hero-sub">영수증 말고 사업에 집중하세요.<br>경리 업무, 오늘부터 재택스가 책임집니다.</p>
       <div class="hero-btns">
-        <a href="#contact" class="btn-black">무료 상담 신청 →</a>
+        <a href="#" class="btn-black" onclick="ChannelIO('showMessenger');return false;">무료 상담 신청 →</a>
         <a href="#services" class="btn-ghost">서비스 알아보기</a>
       </div>
     </div>
@@ -262,7 +262,7 @@
           <li><i data-lucide="check" class="chk"></i> 세무사 대응 지원</li>
           <li><i data-lucide="check" class="chk"></i> 서류·행정 처리</li>
         </ul>
-        <a href="#contact" class="plan-cta">상담 신청</a>
+        <a href="#" class="plan-cta" onclick="ChannelIO('showMessenger');return false;">상담 신청</a>
       </div>
       <div class="plan-card featured">
         <div class="featured-badge">추천</div>
@@ -278,7 +278,7 @@
           <li><i data-lucide="check" class="chk"></i> 고정비·변동비 구조화 및 분석</li>
           <li><i data-lucide="check" class="chk"></i> 월별 매출·비용 현황 리포트</li>
         </ul>
-        <a href="#contact" class="plan-cta">상담 신청</a>
+        <a href="#" class="plan-cta" onclick="ChannelIO('showMessenger');return false;">상담 신청</a>
       </div>
       <div class="plan-card">
         <div class="plan-tier">PREMIUM</div>
@@ -293,7 +293,7 @@
           <li><i data-lucide="check" class="chk"></i> 운영 일정 총괄</li>
           <li><i data-lucide="check" class="chk"></i> 자금 흐름 관리 및 현금흐름 리포트</li>
         </ul>
-        <a href="#contact" class="plan-cta">상담 신청</a>
+        <a href="#" class="plan-cta" onclick="ChannelIO('showMessenger');return false;">상담 신청</a>
       </div>
     </div>
   </div>
@@ -306,7 +306,7 @@
       <div class="why-sticky reveal">
         <span class="eyebrow">Why Zetax</span>
         <h2 class="section-title">재택스를 선택할 이유</h2>
-        <div class="why-quote">"재택스는 경리를 대행하지 않는다.<br>경리 운영을 책임진다."</div>
+        <div class="why-quote">"경리 걱정, 이제 안하셔도 됩니다."</div>
       </div>
       <div>
         <div class="why-item reveal">
@@ -335,9 +335,9 @@
   <div class="inner">
     <div class="contact-inner reveal">
       <span class="eyebrow">상담 신청</span>
-      <h2 class="section-title contact-title">무료 상담<br>신청하기</h2>
+      <h2 class="section-title contact-title">무료 상담 신청하기</h2>
       <p class="contact-subdesc">어떤 플랜이 맞는지 모르셔도 괜찮습니다.<br>현재 상황을 알려주시면 맞춤 안내드립니다.</p>
-      <p class="contact-note">상담 채널 연결 준비 중입니다.</p>
+      <a href="#" class="btn-black contact-cta" onclick="ChannelIO('showMessenger');return false;">지금 바로 상담하기 →</a>
     </div>
   </div>
 </section>
@@ -348,6 +348,11 @@
   <div class="footer-info">세무 신고·세법 해석 등 법적 신고 업무는 수행하지 않습니다. 해당 업무는 고객이 직접 계약한 세무사의 책임입니다.</div>
   <div class="footer-copy">© 2026 재택스</div>
 </footer>
+
+<script>
+  (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments)};ch.q=[];ch.c=function(args){ch.q.push(args)};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+  ChannelIO('boot', { pluginKey: 'e9e66eea-5e80-4ab6-8db7-cdaec93e8b73' });
+</script>
 
 <script>
   const obs = new IntersectionObserver((entries) => {

@@ -273,7 +273,8 @@ section { padding: 96px 0; }
 .contact-section .eyebrow { color: #3B6FE8; }
 .contact-title { color: #fff; }
 .contact-subdesc { color: #666; margin-top: 16px; font-size: 17px; line-height: 1.75; }
-.contact-note { margin-top: 40px; font-size: 15px; color: #444; letter-spacing: -0.2px; }
+.contact-cta { margin-top: 40px; display: inline-block; background: #fff; color: #111; white-space: nowrap; }
+.contact-cta:hover { background: #f0f0f0; transform: translateY(-1px); }
 
 /* ── FOOTER ── */
 footer { background: #0a0a0a; border-top: 1px solid #161616; padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
