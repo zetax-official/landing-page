@@ -136,7 +136,7 @@ section { padding: 96px 0; }
 .inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
 .sec-header { margin-bottom: 52px; }
 .sec-header.two { display: block; }
-.sec-header.two .section-desc { margin-top: 16px; max-width: 560px; }
+.sec-header.two .section-desc { margin-top: 16px; max-width: 760px; }
 .eyebrow { font-size: 15px; font-weight: 700; color: #3B6FE8; letter-spacing: 1px; margin-bottom: 12px; display: block; text-transform: uppercase; }
 .section-title { font-size: clamp(26px, 2.6vw, 38px); font-weight: 800; letter-spacing: -1.5px; color: #111; line-height: 1.25; margin-bottom: 16px; }
 .section-desc { font-size: 18px; color: #888; line-height: 1.8; letter-spacing: -0.2px; }
@@ -159,22 +159,18 @@ section { padding: 96px 0; }
 .ba-col.before { background: #f0f0f0; }
 .ba-col.after { background: #EEF3FD; }
 .ba-col-label {
-  font-size: 13px; font-weight: 700; letter-spacing: 1px;
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
   text-transform: uppercase; margin-bottom: 28px;
-  display: flex; align-items: center; gap: 8px;
 }
-.ba-col.before .ba-col-label { color: #aaa; }
+.ba-col.before .ba-col-label { color: #888; }
 .ba-col.after .ba-col-label { color: #3B6FE8; }
-.ba-items { display: flex; flex-direction: column; gap: 18px; }
-.ba-item { display: flex; align-items: flex-start; gap: 14px; }
-.ba-item-icon {
-  width: 22px; height: 22px;
-  flex-shrink: 0; margin-top: 2px;
-}
+.ba-items { display: flex; flex-direction: column; gap: 20px; }
+.ba-item { display: flex; align-items: flex-start; gap: 12px; }
+.ba-item-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
 .ba-col.before .ba-item-icon { color: #bbb; }
 .ba-col.after .ba-item-icon { color: #3B6FE8; }
-.ba-item-text { font-size: 18px; line-height: 1.6; letter-spacing: -0.3px; }
-.ba-col.before .ba-item-text { color: #999; }
+.ba-item-text { font-size: 17px; line-height: 1.65; letter-spacing: -0.3px; }
+.ba-col.before .ba-item-text { color: #666; }
 .ba-col.after .ba-item-text { color: #111; font-weight: 600; }
 
 /* ── HOW WE WORK ── */
