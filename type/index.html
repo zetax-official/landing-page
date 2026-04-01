@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>대표님 유형 진단 — 재택스</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💼</text></svg>">
+  <meta property="og:title" content="나는 어떤 대표일까?" />
+  <meta property="og:description" content="20가지 질문으로 알아보는 대표님 업무스타일" />
+  <meta property="og:image" content="https://zetax.co.kr/type/og-image.png" />
+  <meta property="og:url" content="https://zetax.co.kr/type/" />
+  <meta name="description" content="20가지 질문으로 알아보는 대표님 업무스타일" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111;
+      --blue: #2563EB;
+      --blue-dark: #1d4ed8;
+      --blue-light: #eff6ff;
+      --white: #fff;
+      --gray-100: #f5f5f5;
+      --gray-200: #e8e8e8;
+      --gray-500: #888;
+      --gray-700: #444;
+      --accent: #1a1a1a;
+      --radius: 16px;
+      --font: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--gray-100);
+      color: var(--black);
+      min-height: 100vh;
+    }
+
+    /* ───── SCREENS ───── */
+    .screen { display: none; min-height: 100vh; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    /* ───── INTRO ───── */
+    #screen-intro {
+      background: var(--blue-light);
+      color: var(--black);
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .intro-badge {
+      display: inline-block;
+      background: rgba(37,99,235,0.1);
+      color: var(--blue);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .intro-title {
+      font-size: clamp(26px, 7vw, 36px);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 16px;
+      color: var(--black);
+      word-break: keep-all;
+    }
+    .intro-title em { font-style: normal; color: var(--blue); }
+    .intro-sub {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .btn-start {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 17px;
+      font-weight: 700;
+      padding: 18px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      margin: 0 auto;
+    }
+    .btn-start:active { opacity: 0.85; }
+    .btn-share-intro {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      background: #FEE500;
+      color: #000;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      margin: 12px auto 0;
+    }
+
+    /* ───── QUIZ ───── */
+    #screen-quiz {
+      background: var(--white);
+      padding: 0;
+    }
+    .quiz-header {
+      padding: 16px 24px 14px;
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      z-index: 10;
+    }
+    .quiz-progress-label {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-bottom: 10px;
+    }
+    .quiz-progress-bar {
+      height: 4px;
+      background: var(--gray-200);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .quiz-body {
+      padding: 32px 24px 40px;
+      flex: 1;
+    }
+    .quiz-question {
+      font-size: clamp(18px, 5vw, 22px);
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 36px;
+      color: var(--black);
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-size: 15px;
+      color: var(--gray-700);
+      background: var(--white);
+      width: 100%;
+      text-align: left;
+    }
+    .quiz-option:active { background: var(--gray-100); }
+    .quiz-option.selected {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: var(--white);
+    }
+    .option-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-200);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .quiz-option.selected .option-dot {
+      background: var(--white);
+      border-color: var(--white);
+    }
+    .quiz-option.selected .option-dot::after {
+      content: '✓';
+      color: var(--blue);
+      font-weight: 900;
+    }
+    .quiz-option-label { flex: 1; line-height: 1.4; }
+
+    /* ───── RESULT ───── */
+    #screen-result {
+      background: var(--gray-100);
+    }
+    .result-hero {
+      background: var(--blue);
+      color: var(--white);
+      padding: 48px 24px 40px;
+      text-align: center;
+    }
+    .result-type-name {
+      font-size: clamp(28px, 8vw, 40px);
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .result-tagline {
+      font-size: 15px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+    }
+    .result-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .result-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .result-card h3 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+    }
+    .result-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--gray-700);
+    }
+    .result-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .result-card ul li {
+      font-size: 15px;
+      color: var(--gray-700);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .result-card ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--black);
+      font-weight: 700;
+    }
+    .result-card.strength ul li::before {
+      content: '✓';
+      color: var(--blue);
+      font-weight: 700;
+    }
+    .result-card.weakness ul li::before {
+      content: '·';
+      color: var(--gray-500);
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .result-plan-card {
+      padding: 8px 0 0;
+      text-align: center;
+    }
+    .result-plan-card p {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+    .btn-consult {
+      display: block;
+      width: 100%;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-consult:active { background: var(--blue-dark); }
+    .result-share {
+      padding: 0 24px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-retry {
+      display: block;
+      width: 100%;
+      background: var(--white);
+      color: var(--black);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 16px;
+      border-radius: 12px;
+      border: 2px solid var(--gray-200);
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn-share {
+      display: block;
+      width: 100%;
+      background: #FEE500;
+      color: #000;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     INTRO
+══════════════════════════════════════ -->
+<section id="screen-intro" class="screen active">
+  <div class="intro-badge">대표님 유형 진단 × 재택스</div>
+  <h1 class="intro-title">나는 어떤 <em>대표</em>일까?</h1>
+  <p class="intro-sub">
+    20가지 질문으로 알아보는<br>
+    대표님 업무스타일
+  </p>
+  <button class="btn-start" onclick="startQuiz()">지금 바로 진단하기 →</button>
+  <button class="btn-share-intro" onclick="shareKakao()">카카오톡으로 공유하기</button>
+</section>
+
+<!-- ══════════════════════════════════════
+     QUIZ
+══════════════════════════════════════ -->
+<section id="screen-quiz" class="screen">
+  <div class="quiz-header">
+    <div class="quiz-progress-label">
+      <span id="q-count-label"></span>
+    </div>
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+  <div class="quiz-body">
+<p class="quiz-question" id="q-text"></p>
+    <div class="quiz-options" id="q-options"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     RESULT
+══════════════════════════════════════ -->
+<section id="screen-result" class="screen">
+  <div class="result-hero">
+    <div class="result-type-name" id="r-name"></div>
+    <div class="result-tagline" id="r-tagline"></div>
+  </div>
+  <div class="result-body">
+    <div class="result-card">
+      <h3>이런 대표님이에요</h3>
+      <p id="r-trait"></p>
+    </div>
+    <div class="result-card strength">
+      <h3>대표님의 강점</h3>
+      <ul id="r-strength"></ul>
+    </div>
+    <div class="result-card weakness">
+      <h3>아쉬운 점</h3>
+      <ul id="r-weakness"></ul>
+    </div>
+    <div class="result-card">
+      <h3>지금 당장 해볼 것</h3>
+      <ul id="r-solution"></ul>
+    </div>
+    <div class="result-plan-card">
+      <p>혼자 하려니 막막하신가요?</p>
+      <button class="btn-consult" onclick="openConsult()">재택스 알아보기 →</button>
+    </div>
+  </div>
+  <div class="result-share">
+    <button class="btn-share" onclick="shareKakao()">카카오톡으로 공유하기</button>
+    <button class="btn-retry" onclick="retryQuiz()">다시 진단하기</button>
+  </div>
+</section>
+
+<script>
+// ══════════════════════════════════════
+// 문항 데이터
+// ══════════════════════════════════════
+const AXES = ['A', 'B', 'C', 'D'];
+const AXIS_LABELS = {
+  A: '의사결정 스타일',
+  B: '정보 처리 방식',
+  C: '판단 기준',
+  D: '운영 스타일',
+};
+
+const QUESTIONS = [
+  // ── [A] E/I ──
+  { axis: 'A', positive: 'E', text: '중요한 결정은 사람들과 빠르게 논의하면서 내린다.' },
+  { axis: 'A', positive: 'I', text: '혼자 정리된 후에야 실행이 편하다.' },
+  { axis: 'A', positive: 'E', text: '네트워킹/미팅에서 아이디어를 얻는 편이다.' },
+  { axis: 'A', positive: 'I', text: '혼자 고민할 시간이 없으면 판단이 흐려진다.' },
+  { axis: 'A', positive: 'E', text: '대화하면서 생각이 정리된다.' },
+  // ── [B] S/N ──
+  { axis: 'B', positive: 'S', text: '숫자/데이터 기반으로 판단하는 게 편하다.' },
+  { axis: 'B', positive: 'N', text: '미래 가능성이나 방향성을 먼저 본다.' },
+  { axis: 'B', positive: 'S', text: '검증된 방식이 아니면 불안하다.' },
+  { axis: 'B', positive: 'N', text: '새로운 방식 시도에 거부감이 없다.' },
+  { axis: 'B', positive: 'N', text: '디테일보다 큰 그림이 중요하다.' },
+  // ── [C] T/F ──
+  { axis: 'C', positive: 'T', text: '직원/거래처 관계보다 결과가 우선이다.' },
+  { axis: 'C', positive: 'F', text: '관계가 틀어질 것 같으면 손해를 감수한다.' },
+  { axis: 'C', positive: 'T', text: '의사결정 시 감정보다 숫자가 중요하다.' },
+  { axis: 'C', positive: 'F', text: '팀 분위기가 성과만큼 중요하다.' },
+  { axis: 'C', positive: 'T', text: '냉정한 판단을 잘 내리는 편이다.' },
+  // ── [D] J/P ──
+  { axis: 'D', positive: 'J', text: '계획이 있어야 마음이 편하다.' },
+  { axis: 'D', positive: 'P', text: '상황에 따라 즉흥적으로 바꾸는 편이다.' },
+  { axis: 'D', positive: 'J', text: '마감과 일정은 반드시 지켜야 한다.' },
+  { axis: 'D', positive: 'P', text: '급한 일부터 처리하는 스타일이다.' },
+  { axis: 'D', positive: 'P', text: '체계보다 속도가 중요하다.' },
+];
+
+const OPTIONS = [
+  { label: '전혀 아니다', score: 1 },
+  { label: '아닌 편이다', score: 2 },
+  { label: '보통이다', score: 3 },
+  { label: '그런 편이다', score: 4 },
+  { label: '매우 그렇다', score: 5 },
+];
+
+// ══════════════════════════════════════
+// 16유형 데이터
+// ══════════════════════════════════════
+const TYPES = {
+  ENTJ: {
+    name: '확장형 CEO',
+    tagline: '속도는 미쳤는데, 관리가 구멍난 타입',
+    trait: '빠른 의사결정과 공격적 성장이 강점입니다. 위임을 잘하고 추진력이 탁월하지만, 디테일과 리스크 관리가 취약합니다.',
+    strength: ['빠른 의사결정과 실행력', '사람을 움직이는 리더십', '성장 기회를 놓치지 않는 감각'],
+    weakness: ['재무 디테일 놓침', '비용이 어디서 새는지 파악 안 됨', '경리/세무 항상 불안'],
+    solution: ['경리 풀아웃소싱으로 대표님은 의사결정만', '재무 리포트 자동화', '의사결정용 KPI 대시보드'],
+    plan: 'scale',
+  },
+  ENTP: {
+    name: '실험형 사업가',
+    tagline: '이것저것 다 벌리는데, 수익 구조가 정리 안 된 타입',
+    trait: '새로운 아이디어를 빠르게 실행하고 사업을 확장하지만, 사업별 손익 구조가 뒤엉켜 있어 실제 수익이 보이지 않습니다.',
+    strength: ['아이디어를 빠르게 사업화하는 실행력', '변화에 유연하게 적응', '새로운 기회를 먼저 포착'],
+    weakness: ['사업별 손익 구조 미분리', '수익은 나는데 어디서 나는지 모름', '비용 통제 안 됨'],
+    solution: ['사업별 손익 분리 분석', '비용 구조 정리', 'KPI 대시보드로 수익 가시화'],
+    plan: 'pro',
+  },
+  ENFJ: {
+    name: '비전형 리더',
+    tagline: '사람도 잡고 성과도 잡으려다 숫자가 안 보이는 타입',
+    trait: '팀을 이끄는 리더십과 명확한 비전이 강점이지만, 재무 숫자보다 사람과 관계에 집중하다 보니 비용 관리가 후순위가 됩니다.',
+    strength: ['팀원을 성장시키는 리더십', '명확한 비전으로 방향 제시', '고객·파트너 신뢰 구축'],
+    weakness: ['인건비/고정비 파악 안 됨', '수익보다 팀 유지에 집중', '재무 데이터 확인 안 함'],
+    solution: ['인건비 구조 정리', '월별 비용 리포트', '재무 현황 가시화'],
+    plan: 'standard',
+  },
+  ENFP: {
+    name: '아이디어형 대표',
+    tagline: '돈은 잘 벌지만 어디로 새는지 모르는 타입',
+    trait: '마케팅/브랜딩 감각과 실행력이 탁월합니다. 매출을 만드는 능력은 뛰어나지만 재무/경리 관리는 손도 못 대고 있습니다.',
+    strength: ['탁월한 마케팅·브랜딩 감각', '고객 마음을 읽는 능력', '에너지와 추진력으로 매출 창출'],
+    weakness: ['돈 흐름 파악 못 함', '세무 리스크 인지 부족', '비용 어디서 새는지 감 없음'],
+    solution: ['매출/비용 흐름 시각화', '비용 통제 시스템', '세무 리스크 사전 관리'],
+    plan: 'pro',
+  },
+  ESTJ: {
+    name: '통제형 관리자',
+    tagline: '시스템은 있는데 비효율이 숨어있는 타입',
+    trait: '체계적인 관리와 강한 실행력을 갖췄습니다. 다만 기존 방식에 집착하다 보면 비효율적인 프로세스를 개선하지 못하는 경우가 많습니다.',
+    strength: ['철저한 관리와 책임감', '약속과 마감을 반드시 지킴', '안정적인 운영 체계 구축'],
+    weakness: ['비효율 프로세스 방치', '자동화 거부로 시간 낭비', '리포트 없이 감으로 판단'],
+    solution: ['반복 업무 자동화', '운영 리포트 정기 제공', '프로세스 최적화'],
+    plan: 'pro',
+  },
+  ESTP: {
+    name: '실행형 영업왕',
+    tagline: '매출은 OK, 정산은 박살난 타입',
+    trait: '영업력과 실행 속도가 압도적입니다. 하지만 빠르게 치고 나가다 보니 정산, 비용 관리, 세무 처리가 항상 뒤처집니다.',
+    strength: ['압도적인 영업력과 협상력', '빠른 실행과 결단력', '현장에서 기회를 만드는 능력'],
+    weakness: ['매출 대비 비용 통제 안 됨', '정산 누락 잦음', '세무/경리 처리 지연'],
+    solution: ['매출→비용→이익 흐름 정리', '정산 자동화', '비용 실시간 관리'],
+    plan: 'standard',
+  },
+  ESFJ: {
+    name: '관계형 운영자',
+    tagline: '사람 챙기다 비용이 증가하는 타입',
+    trait: '직원과 거래처를 잘 챙기는 관계 중심 운영자입니다. 하지만 인건비와 고정비가 조용히 늘어나는 걸 놓치기 쉽습니다.',
+    strength: ['직원·거래처와의 신뢰 관계', '팀 분위기를 살리는 소통력', '고객 만족도가 높은 운영'],
+    weakness: ['인건비 구조 파악 안 됨', '고정비 증가 모름', '급여/4대보험 처리 부담'],
+    solution: ['인건비/고정비 구조 정리', '급여·비용 관리 대행', '월별 비용 리포트'],
+    plan: 'standard',
+  },
+  ESFP: {
+    name: '현장형 대표',
+    tagline: '현장은 완벽한데 숫자는 남의 일인 타입',
+    trait: '현장 감각과 순발력이 뛰어납니다. 고객 만족도가 높지만 경리/재무는 "나중에" 미루다 쌓이는 패턴이 반복됩니다.',
+    strength: ['뛰어난 현장 감각과 순발력', '고객을 사로잡는 서비스 능력', '에너지로 팀을 이끄는 힘'],
+    weakness: ['경리 업무 계속 미룸', '증빙 누락', '세무 신고 직전 패닉'],
+    solution: ['경리 업무 완전 위임', '증빙 수집 자동화', '세무 신고 사전 관리'],
+    plan: 'standard',
+  },
+  INTJ: {
+    name: '전략형 설계자',
+    tagline: '계획은 완벽한데 실행이 따라오지 않는 타입',
+    trait: '장기 전략과 구조 설계에 탁월합니다. 하지만 실행 단계에서 경리/운영 디테일이 전략의 발목을 잡는 경우가 많습니다.',
+    strength: ['치밀한 장기 전략 수립', '복잡한 구조를 꿰뚫는 통찰', '독립적이고 효율적인 의사결정'],
+    weakness: ['운영 실무 처리 버거움', '계획 대비 실행 지연', '숫자 관리 후순위'],
+    solution: ['운영·경리 전체 위임', '실행 리포트 정기 제공', 'KPI 기반 판단 지원'],
+    plan: 'pro',
+  },
+  INTP: {
+    name: '분석형 기획자',
+    tagline: '분석은 완벽한데 실행이 없는 타입',
+    trait: '데이터 분석과 구조 파악 능력이 탁월합니다. 하지만 완벽한 분석을 추구하다 실행이 늦어지고, 경리는 신경 쓸 여유가 없습니다.',
+    strength: ['데이터 기반의 정확한 판단', '문제의 본질을 파고드는 분석력', '체계적인 기획 능력'],
+    weakness: ['경리 처리 계속 미룸', '자동화는 원하는데 설정이 부담', '세무 리스크 인지는 하지만 미처리'],
+    solution: ['경리 자동화 시스템 구축', '반복 업무 완전 제거', '월별 자동 리포트'],
+    plan: 'standard',
+  },
+  INFJ: {
+    name: '통찰형 리더',
+    tagline: '방향은 맞는데 운영이 버거운 타입',
+    trait: '사업의 방향과 본질을 꿰뚫는 통찰력을 갖췄습니다. 하지만 비전을 실행으로 옮기는 과정에서 운영 부담이 발목을 잡습니다.',
+    strength: ['사업 본질을 꿰뚫는 통찰력', '팀원을 이끄는 진정성', '장기적 관점의 의사결정'],
+    weakness: ['운영 실무에 에너지 과다 소모', '경리/재무 확인 못 함', '방향은 있는데 실행 지원 없음'],
+    solution: ['경리·운영 위임으로 비전 집중', '월별 재무 리포트', '운영 구조 체계화'],
+    plan: 'pro',
+  },
+  INFP: {
+    name: '가치형 창업가',
+    tagline: '좋은 일 하려는데 숫자가 발목 잡는 타입',
+    trait: '가치와 신념 기반으로 사업을 이끕니다. 숫자보다 의미를 중시하다 보니 재무 관리가 특히 취약하고 스트레스 원인이 됩니다.',
+    strength: ['명확한 가치관과 사업 철학', '고객과 진심으로 공감하는 능력', '창의적이고 독창적인 관점'],
+    weakness: ['재무 숫자 파악 안 됨', '세금/경리가 항상 불안', '비용 관리 체계 없음'],
+    solution: ['경리 전담 위임으로 스트레스 제거', '알기 쉬운 재무 리포트', '세무 리스크 사전 차단'],
+    plan: 'standard',
+  },
+  ISTJ: {
+    name: '관리형 사장님',
+    tagline: '혼자 다 하다 지치는 타입',
+    trait: '꼼꼼하고 책임감이 강합니다. 리스크를 최소화하려다 보니 모든 일을 직접 챙기게 되고, 결국 과부하가 쌓입니다.',
+    strength: ['꼼꼼한 관리와 강한 책임감', '신뢰할 수 있는 안정적인 운영', '리스크를 사전에 차단하는 능력'],
+    weakness: ['혼자 다 하다 번아웃', '반복 업무 제거 못 함', '확장할 여유 없음'],
+    solution: ['반복 경리 업무 완전 위임', '표준 프로세스 구축', '증빙/세무 자동화'],
+    plan: 'standard',
+  },
+  ISTP: {
+    name: '실용형 문제해결사',
+    tagline: '문제는 잘 고치는데 구조가 없는 타입',
+    trait: '눈앞의 문제를 빠르게 해결하는 능력이 탁월합니다. 하지만 임시방편이 반복되면서 경리/재무 구조가 잡히지 않습니다.',
+    strength: ['눈앞의 문제를 빠르게 해결', '도구와 시스템을 효율적으로 활용', '냉정한 판단력'],
+    weakness: ['임시방편 반복으로 구조 없음', '경리 데이터 뒤엉킴', '세무 처리 직전까지 미룸'],
+    solution: ['경리 구조 체계화', '데이터 정리 위임', '월별 정기 리포트로 현황 파악'],
+    plan: 'standard',
+  },
+  ISFJ: {
+    name: '책임형 운영자',
+    tagline: '망하지는 않는데 커지지도 않는 타입',
+    trait: '직원을 잘 챙기고 안정적으로 운영합니다. 하지만 성장 전략보다 현상 유지에 집중하다 보니 비용 최적화 기회를 놓칩니다.',
+    strength: ['직원과 고객을 세심하게 챙기는 능력', '안정적이고 일관된 운영', '신뢰를 쌓는 꾸준함'],
+    weakness: ['고정비 최적화 못 함', '성장 전략 없이 현상 유지', '재무 가시화 안 됨'],
+    solution: ['비용 구조 최적화', '재무 현황 가시화', '인건비/고정비 분석'],
+    plan: 'standard',
+  },
+  ISFP: {
+    name: '감성형 창업자',
+    tagline: '내 일에는 열정적인데 숫자는 무서운 타입',
+    trait: '자신의 분야에 깊은 열정을 가지고 있습니다. 경리/재무는 막막하고 두렵게 느껴져 계속 미루는 패턴이 반복됩니다.',
+    strength: ['자신의 분야에 대한 깊은 전문성', '고객과 진심으로 소통하는 능력', '섬세하고 감각적인 서비스'],
+    weakness: ['경리/세무 막막함', '숫자 보는 게 두려움', '미루다 세금 폭탄 경험'],
+    solution: ['경리 완전 위임으로 두려움 해소', '쉬운 말로 설명하는 월별 리포트', '세무 신고 사전 처리'],
+    plan: 'standard',
+  },
+};
+
+const PLANS = {
+  standard: {
+    name: '스탠다드 플랜',
+    price: '베타가 월 30만원 (정가 59~79만원)',
+    features: ['통장 입출금 정리', '증빙 수집·관리', '세무대리인 자료 패키징', '월 마감 리포트', '담당자 직접 소통'],
+  },
+  pro: {
+    name: '프로 플랜',
+    price: '베타가 월 40만원 (정가 89~119만원)',
+    features: ['스탠다드 전체 포함', '매출/비용 분석 리포트', 'KPI 관리', '비용 통제 시스템', '월별 재무 현황 보고'],
+  },
+  scale: {
+    name: '스케일 플랜',
+    price: '베타가 월 60만원 (정가 149~199만원)',
+    features: ['프로 전체 포함', '의사결정용 대시보드', '구조 개선 컨설팅', 'CFO 관점 재무관리', '확장 단계 운영 지원'],
+  },
+};
+
+// ══════════════════════════════════════
+// 상태
+// ══════════════════════════════════════
+var currentQ = 0;
+var answers = new Array(QUESTIONS.length).fill(null);
+
+// ══════════════════════════════════════
+// 화면 전환
+// ══════════════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ══════════════════════════════════════
+// 퀴즈 렌더링
+// ══════════════════════════════════════
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  const total = QUESTIONS.length;
+
+  document.getElementById('q-count-label').textContent = `${currentQ + 1} / ${total}`;
+  document.getElementById('progress-fill').style.width = `${((currentQ + 1) / total) * 100}%`;
+  document.getElementById('q-text').textContent = q.text;
+
+  const optContainer = document.getElementById('q-options');
+  optContainer.innerHTML = '';
+  OPTIONS.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option' + (answers[currentQ] === i ? ' selected' : '');
+    btn.innerHTML = `<span class="option-dot"></span><span class="quiz-option-label">${opt.label}</span>`;
+    btn.onclick = () => selectOption(i);
+    optContainer.appendChild(btn);
+  });
+}
+
+function selectOption(idx) {
+  answers[currentQ] = idx;
+  document.querySelectorAll('.quiz-option').forEach((btn, i) => {
+    btn.classList.toggle('selected', i === idx);
+    btn.disabled = true;
+  });
+  setTimeout(() => {
+    if (currentQ < QUESTIONS.length - 1) {
+      currentQ++;
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }, 350);
+}
+
+// ══════════════════════════════════════
+// 결과 계산
+// ══════════════════════════════════════
+function calcType() {
+  const scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+  const opposite = { E: 'I', I: 'E', S: 'N', N: 'S', T: 'F', F: 'T', J: 'P', P: 'J' };
+
+  QUESTIONS.forEach((q, i) => {
+    const score = OPTIONS[answers[i] ?? 2].score;
+    const pos = q.positive;
+    const neg = opposite[pos];
+    scores[pos] += score;
+    scores[neg] += (6 - score);
+  });
+
+  const E_I = scores.E >= scores.I ? 'E' : 'I';
+  const S_N = scores.S >= scores.N ? 'S' : 'N';
+  const T_F = scores.T >= scores.F ? 'T' : 'F';
+  const J_P = scores.J >= scores.P ? 'J' : 'P';
+  return E_I + S_N + T_F + J_P;
+}
+
+function showResult() {
+  const code = calcType();
+  const type = TYPES[code];
+
+
+  document.getElementById('r-name').textContent = type.name;
+  document.getElementById('r-tagline').textContent = type.tagline;
+  document.getElementById('r-trait').textContent = type.trait;
+
+  document.getElementById('r-strength').innerHTML = type.strength.map(s => `<li>${s}</li>`).join('');
+  document.getElementById('r-weakness').innerHTML = type.weakness.map(w => `<li>${w}</li>`).join('');
+  document.getElementById('r-solution').innerHTML = type.solution.map(s => `<li>${s}</li>`).join('');
+
+  showScreen('screen-result');
+}
+
+// ══════════════════════════════════════
+// 액션
+// ══════════════════════════════════════
+function previewResult() {
+  answers = new Array(QUESTIONS.length).fill(0);
+  showResult();
+}
+
+function startQuiz() {
+  currentQ = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  showScreen('screen-quiz');
+  renderQuestion();
+}
+
+function retryQuiz() {
+  startQuiz();
+}
+
+function openConsult() {
+  window.open('https://hyekyungko.github.io/zetax-landing/', '_blank');
+}
+
+function shareKakao() {
+  if (navigator.share) {
+    navigator.share({
+      title: '나는 어떤 대표일까?',
+      text: '20가지 질문으로 알아보는 대표님 업무스타일',
+      url: window.location.href,
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      alert('링크가 복사됐어요! 카카오톡에 붙여넣기 해주세요.');
+    });
+  }
+}
+
+</script>
+</body>
+</html>
