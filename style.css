@@ -264,20 +264,22 @@ section { padding: 96px 0; }
 .why-text { font-size: 17px; color: #888; line-height: 1.8; letter-spacing: -0.1px; }
 
 /* ── CONTACT ── */
-.contact-section { background: #111; }
+.contact-section { background: #3B6FE8; }
 .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
-.contact-section .eyebrow { color: #3B6FE8; }
+.contact-section .eyebrow { color: rgba(255,255,255,0.7); }
 .contact-title { color: #fff; }
-.contact-subdesc { color: #666; margin-top: 16px; font-size: 17px; line-height: 1.75; }
-.contact-cta { margin-top: 40px; display: inline-block; background: #fff; color: #111; white-space: nowrap; }
+.contact-subdesc { color: rgba(255,255,255,0.8); margin-top: 16px; font-size: 17px; line-height: 1.75; }
+.contact-cta { margin-top: 40px; display: inline-block; background: #fff; color: #3B6FE8; white-space: nowrap; }
 .contact-cta:hover { background: #f0f0f0; transform: translateY(-1px); }
 
 /* ── FOOTER ── */
-footer { background: #0a0a0a; border-top: 1px solid #161616; padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+footer { background: #0a0a0a; border-top: 1px solid #161616; padding: 32px 48px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .footer-logo { font-size: 18px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
 .footer-logo span { color: #3B6FE8; }
-.footer-info { font-size: 13px; color: #333; line-height: 1.7; max-width: 360px; text-align: center; }
-.footer-copy { font-size: 13px; color: #333; }
+.footer-biz { font-size: 12px; color: #888; line-height: 1.8; text-align: left; }
+.footer-biz a { color: #888; text-decoration: none; }
+.footer-biz a:hover { color: #bbb; }
+.footer-copy { font-size: 13px; color: #888; }
 
 /* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
