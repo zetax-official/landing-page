@@ -145,11 +145,11 @@ section { padding: 96px 0; }
 .who-section { background: #fff; }
 .who-checklist { display: flex; flex-direction: column; gap: 16px; max-width: 600px; }
 .who-check-item {
-  display: flex; align-items: flex-start; gap: 12px;
+  display: flex; align-items: center; gap: 12px;
   font-size: 18px; font-weight: 500; color: #1A1A1A;
   letter-spacing: -0.3px; line-height: 1.5;
 }
-.who-check-icon { color: #1212A8; flex-shrink: 0; width: 28px; height: 28px; margin-top: 1px; }
+.who-emoji { flex-shrink: 0; font-size: 22px; line-height: 1; }
 .who-pain-item::before { content: ''; width: 4px; height: 4px; background: #1212A8; border-radius: 50%; flex-shrink: 0; }
 
 /* ── BEFORE/AFTER ── */
@@ -255,7 +255,8 @@ section { padding: 96px 0; }
 .why-section { background: #f8f8f8; }
 .why-layout { display: grid; grid-template-columns: 320px 1fr; gap: 80px; align-items: start; }
 .why-sticky { position: sticky; top: 88px; }
-.why-quote { margin-top: 24px; font-size: 18px; font-weight: 700; color: #1A1A1A; line-height: 1.65; letter-spacing: -0.4px; padding: 24px; background: #fff; border-radius: 12px; border-left: 3px solid #1212A8; }
+.why-sub { margin-top: 16px; font-size: 20px; font-weight: 400; color: #555; line-height: 1.75; letter-spacing: -0.3px; }
+.why-sticky .section-title { font-size: clamp(32px, 3.5vw, 52px); }
 .why-item { display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 28px 0; border-bottom: 1px solid #eee; align-items: start; }
 .why-item:first-child { padding-top: 0; }
 .why-item:last-child { border-bottom: none; }
