@@ -165,8 +165,8 @@ section { padding: 96px 0; }
 .ba-col.before .ba-col-label { color: #888; }
 .ba-col.after .ba-col-label { color: #1212A8; }
 .ba-items { display: flex; flex-direction: column; gap: 20px; }
-.ba-item { display: flex; align-items: flex-start; gap: 12px; }
-.ba-item-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
+.ba-item { display: flex; align-items: center; gap: 12px; }
+.ba-item-icon { width: 20px; height: 20px; flex-shrink: 0; }
 .ba-col.before .ba-item-icon { color: #bbb; }
 .ba-col.after .ba-item-icon { color: #1212A8; }
 .ba-item-text { font-size: 17px; line-height: 1.65; letter-spacing: -0.3px; }
