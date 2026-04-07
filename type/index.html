@@ -314,6 +314,19 @@
       cursor: pointer;
       text-align: center;
     }
+    .btn-share-result {
+      display: block;
+      width: 100%;
+      background: var(--black);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
     .btn-share {
       display: block;
       width: 100%;
@@ -394,8 +407,9 @@
     </div>
   </div>
   <div class="result-share">
+    <button class="btn-share-result" onclick="shareMyResult()">내 결과 공유하기</button>
     <button class="btn-share" onclick="shareKakao()">카카오톡으로 공유하기</button>
-    <button class="btn-retry" onclick="retryQuiz()">다시 진단하기</button>
+    <button class="btn-retry" onclick="retryQuiz()"><span style="font-size:20px;font-weight:300;line-height:1;">↺</span> 다시 진단하기</button>
   </div>
 </section>
 
@@ -596,6 +610,15 @@ const TYPES = {
   },
 };
 
+// MBTI 내부 코드 ↔ 외부 Z 코드 매핑
+const MBTI_TO_Z = {
+  ENTJ: 'z01', ENTP: 'z02', ENFJ: 'z03', ENFP: 'z04',
+  ESTJ: 'z05', ESTP: 'z06', ESFJ: 'z07', ESFP: 'z08',
+  INTJ: 'z09', INTP: 'z10', INFJ: 'z11', INFP: 'z12',
+  ISTJ: 'z13', ISTP: 'z14', ISFJ: 'z15', ISFP: 'z16',
+};
+const Z_TO_MBTI = Object.fromEntries(Object.entries(MBTI_TO_Z).map(([k, v]) => [v, k]));
+
 const PLANS = {
   standard: {
     name: '스탠다드 플랜',
@@ -619,6 +642,7 @@ const PLANS = {
 // ══════════════════════════════════════
 var currentQ = 0;
 var answers = new Array(QUESTIONS.length).fill(null);
+var currentZCode = null;
 
 // ══════════════════════════════════════
 // 화면 전환
@@ -689,10 +713,18 @@ function calcType() {
   return E_I + S_N + T_F + J_P;
 }
 
-function showResult() {
-  const code = calcType();
-  const type = TYPES[code];
+function showResult(inputCode) {
+  let mbtiCode, zCode;
+  if (inputCode && inputCode.startsWith('z')) {
+    zCode = inputCode;
+    mbtiCode = Z_TO_MBTI[zCode];
+  } else {
+    mbtiCode = inputCode || calcType();
+    zCode = MBTI_TO_Z[mbtiCode];
+  }
 
+  const type = TYPES[mbtiCode];
+  if (!type || !zCode) return;
 
   document.getElementById('r-name').textContent = type.name;
   document.getElementById('r-tagline').textContent = type.tagline;
@@ -702,6 +734,8 @@ function showResult() {
   document.getElementById('r-weakness').innerHTML = type.weakness.map(w => `<li>${w}</li>`).join('');
   document.getElementById('r-solution').innerHTML = type.solution.map(s => `<li>${s}</li>`).join('');
 
+  currentZCode = zCode;
+  history.replaceState(null, '', '?type=' + zCode);
   showScreen('screen-result');
 }
 
@@ -725,19 +759,44 @@ function retryQuiz() {
 }
 
 function openConsult() {
-  window.open('https://hyekyungko.github.io/zetax-landing/', '_blank');
+  window.open('https://zetax.co.kr', '_blank');
 }
 
 function shareKakao() {
+  const introUrl = 'https://zetax.co.kr/type/';
   if (navigator.share) {
     navigator.share({
       title: '나는 어떤 대표일까?',
       text: '20가지 질문으로 알아보는 대표님 업무스타일',
-      url: window.location.href,
+      url: introUrl,
     });
   } else {
-    navigator.clipboard.writeText(window.location.href).then(() => {
+    navigator.clipboard.writeText(introUrl).then(() => {
       alert('링크가 복사됐어요! 카카오톡에 붙여넣기 해주세요.');
+    });
+  }
+}
+
+// 페이지 로드 시 ?type= 파라미터로 결과 직행
+(function () {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('type');
+  if (code) showResult(code);
+})();
+
+function shareMyResult() {
+  const url = currentZCode
+    ? 'https://zetax.co.kr/type/' + currentZCode + '/'
+    : window.location.href;
+  if (navigator.share) {
+    navigator.share({
+      title: '나는 어떤 대표일까?',
+      text: '내 대표 유형 결과 확인해봐!',
+      url,
+    });
+  } else {
+    navigator.clipboard.writeText(url).then(() => {
+      alert('결과 링크가 복사됐어요!');
     });
   }
 }

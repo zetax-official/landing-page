@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 1200px; height: 630px; overflow: hidden;
+      background: #2563EB;
+      font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      color: #fff;
+      display: flex; flex-direction: column;
+      padding: 60px 72px;
+    }
+    .top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .wordmark svg { height: 28px; width: auto; }
+    .main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .label { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.6); letter-spacing: 1px; margin-bottom: 20px; }
+    .bar { width: 48px; height: 5px; background: rgba(255,255,255,0.4); border-radius: 3px; margin-bottom: 28px; }
+    .name { font-size: 68px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; margin-bottom: 22px; }
+    .tagline { font-size: 22px; font-weight: 400; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+    .cta { font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.75); }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <div class="wordmark">
+      <!-- ZETAX 워드마크 — 블루 배경 규칙: 워드마크 단독, 심볼 금지 -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="102 0 278 100" fill="#ffffff">
+        <path d="M2.66 78.0V68.576L33.972 31.412L35.796 36.732H3.344V24.8H49.172V34.224L17.86 71.388L16.036 66.068H50.312V78.0Z" transform="translate(102,0)"/>
+        <path d="M59.224 78.0V24.8H100.948V36.428H74.12V66.372H101.936V78.0ZM73.056 56.644V45.396H97.756V56.644Z" transform="translate(102,0)"/>
+        <path d="M123.92 78.0V36.732H107.58V24.8H155.232V36.732H138.968V78.0Z" transform="translate(102,0)"/>
+        <path d="M156.772 78.0 180.256 24.8H195.076L218.636 78.0H202.98L184.588 32.172H190.516L172.124 78.0ZM169.616 67.664 173.492 56.568H199.484L203.36 67.664Z" transform="translate(102,0)"/>
+        <path d="M219.72 78.0 242.976 45.7 242.9 56.416 220.556 24.8H237.504L251.792 45.396L244.572 45.472L258.632 24.8H274.896L252.552 55.808V45.168L276.112 78.0H258.784L244.268 56.34H251.184L236.896 78.0Z" transform="translate(102,0)"/>
+      </svg>
+    </div>
+  </div>
+  <div class="main">
+    <div class="label">대표 유형 진단 결과</div>
+    <div class="bar"></div>
+    <div class="name">아이디어형 대표</div>
+    <div class="tagline">돈은 잘 벌지만 어디로 새는지 모르는 타입</div>
+  </div>
+  <div class="bottom">
+    <div class="cta">나도 진단해보기 →</div>
+  </div>
+</body>
+</html>
