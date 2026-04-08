@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /type/og/
+Disallow: /type/og-image-source.html
+
+Sitemap: https://zetax.co.kr/sitemap.xml
